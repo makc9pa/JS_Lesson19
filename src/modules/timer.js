@@ -16,38 +16,19 @@ const timer = (deadline) => {
         return { timeRemaining, days, hours, minutes, seconds }
     }
 
+    const pad = (n) => {
+        if (n <= 9) { return '0' + n }
+        return n
+    }
+
     const updateClock = () => {
         let getTime =  getTimeRemaining()
         if (getTime.timeRemaining >= 0) {
-
-        if (getTime.days <= 9) {
-            timerDays.textContent = '0' + getTime.days
-        } else {
-            timerDays.textContent = getTime.days 
-        }
-
-        if (getTime.hours <= 9) {
-            timerHours.textContent = '0' + getTime.hours
-        } else {
-            timerHours.textContent = getTime.hours 
-        }
-        
-        if (getTime.minutes <= 9) {
-            timerMinutes.textContent = '0' + getTime.minutes
-        } else {
-            timerMinutes.textContent = getTime.minutes 
-        }
-
-        if (getTime.seconds <= 9) {
-            timerSeconds.textContent = '0' + getTime.seconds
-        } else {
-            timerSeconds.textContent = getTime.seconds 
-        }
-        // console.log(getTime.timeRemaining)
-        if (getTime.timeRemaining <= 0) {
-            clearInterval(idInterval)
-        }
-        }
+            timerDays.textContent = pad(getTime.days)
+            timerHours.textContent = pad(getTime.hours)
+            timerMinutes.textContent = pad(getTime.minutes)
+            timerSeconds.textContent = pad(getTime.seconds)
+        } else { clearInterval(idInterval) }
     }
 
     const idInterval = setInterval(() => {
